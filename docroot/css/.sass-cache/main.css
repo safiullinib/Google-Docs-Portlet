@@ -1,0 +1,19 @@
+.search-wrapper {
+  width: 250px;
+  float: right;
+  text-align: right; }
+
+.doc-list-wrapper {
+  position: relative;
+  top: 35px;
+  margin-bottom: 25px; }
+
+.doc-type-column {
+  text-align: center; }
+
+.col-1 {
+  width: 15px; }
+
+td.last {
+  width: 100px; }
+
