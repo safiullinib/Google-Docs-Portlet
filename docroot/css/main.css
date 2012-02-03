@@ -33,10 +33,23 @@
 	text-align: center;
 }
 
+.gdColumn-2 {
+	vertical-align: bottom;
+}
+
 .col-1 {
 	width: 15px;
+}
+
+.toolbar {
+	vertical-align: bottom;	
 }
 
 td.last {
 	width: 100px;
 }
+
+.table {display:table;}
+.table_row {display:table-row;}
+.table_cell {display:table-cell;padding:7px;}
+.align-bottom {vertical-align:bottom;}

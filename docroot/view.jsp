@@ -31,7 +31,47 @@ if (feed == null) {
 <%
 } else {
 %> 
+<div id="<portlet:namespace />googleDocsWrapper">
+	<div class="toolbar" id="<portlet:namespace />toolbar">
+		<div class="search-wrapper" id="<portlet:namespace />searchWrapper">
+			<aui:form action="" method="get" name="gdSearch" >
+		
+				<aui:layout>
+					<aui:column>
+						<aui:input cssClass="search-input" id="keywords" label="" name="keywords" type="text" />
+					</aui:column>
+		
+					<aui:column>
+						<aui:button cssClass="search-button" name="search" value="search" />
+					</aui:column>
+				</aui:layout>
+				
+			</aui:form>
+		</div>
+		<div class='table'>
+			<portlet:actionURL name="createDoc" var="createDocUrl" />
+			<aui:form action="<%=createDocUrl.toString() %>" method="post" name="gdCreate" >
+			<div class="table_row">
+				<div class="table_cell">
+					<aui:input cssClass="create-input" id="keywords" label="new-doc-name" name="createName" type="text" />
+				</div>
+				<div class="table_cell">
+					<aui:select cssClass="create-type" label="type" name="createType">
+						<aui:option value="document" ><liferay-ui:message key="document" /></aui:option>
+						<aui:option value="spreadsheet" ><liferay-ui:message key="spreadsheet" /></aui:option>
+						<aui:option value="presentation" ><liferay-ui:message key="presentation" /></aui:option>
+					</aui:select>
+				</div>
+				<div class="table_cell align-bottom">
+					<aui:button type="submit" value="Create" />
+				</div>
+			</aui:form>
+			</div>
+		</div>
+	</div>
+	
 <%@include file="/view_docs.jsp" %>
 <%
 }
 %>
+</div>

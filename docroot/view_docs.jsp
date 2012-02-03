@@ -23,40 +23,6 @@
 
 <% DocumentListFeed docListFeed = GoogleDocs.getDocumentListFeed(renderRequest); %>
 
-<div id="<portlet:namespace />googleDocsWrapper">
-	<div class="toolbar" id="<portlet:namespace />toolbar">
-		<div class="search-wrapper" id="<portlet:namespace />searchWrapper">
-			<aui:form action="" method="get" name="gdSearch" >
-		
-				<aui:layout>
-					<aui:column>
-						<aui:input cssClass="search-input" id="keywords" label="" name="keywords" type="text" />
-					</aui:column>
-		
-					<aui:column>
-						<aui:button cssClass="search-button" name="search" value="search" />
-					</aui:column>
-				</aui:layout>
-				
-			</aui:form>
-		</div>
-		<div class="button-wrapper" id="<portlet:namespace />buttonWrapper">
-			
-		<span class="add-button" id="<portlet:namespace />addButtonContainer">
-			<liferay-ui:icon-menu align="left" icon='<%=renderRequest.getContextPath() + "/image/add.png"%>' direction="down" message="create" showExpanded="<%= false %>" showWhenSingleIcon="<%= false %>">
-				<liferay-ui:icon src='<%=renderRequest.getContextPath() + "/image/document.png"%>'
-					message="document" url="https://docs.google.com/DocAction?action=newdoc" target="_blank" />
-				<liferay-ui:icon src='<%=renderRequest.getContextPath() + "/image/spreadsheet.png"%>' 
-					message="spreadsheet" url="https://spreadsheets.google.com/ccc?new=true" target="_blank" />
-				<liferay-ui:icon src='<%=renderRequest.getContextPath() + "/image/presentation.png"%>' 
-					message="presentation" url="https://docs.google.com/?action=new_presentation" target="_blank" />
-			</liferay-ui:icon-menu>
-		</span>
-		
-		
-		</div>
-	</div>
-	
 	<div class="doc-list-wrapper" id="<portlet:namespace />docListWrapper" >
 		<liferay-ui:search-container emptyResultsMessage="there-are-no-google-docs-to-display" delta="20">
 	    	<liferay-ui:search-container-results>
@@ -104,4 +70,3 @@
 	
 		</liferay-ui:search-container>
 	</div>
-</div>
