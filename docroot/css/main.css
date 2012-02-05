@@ -43,6 +43,8 @@
 
 .toolbar {
 	vertical-align: bottom;	
+	border-bottom: 1px solid #C8C9CA;
+	padding-bottom: 10px;
 }
 
 td.last {
