@@ -28,6 +28,7 @@ import com.google.gdata.data.PlainTextConstruct;
 import com.google.gdata.data.docs.DocumentEntry;
 import com.google.gdata.data.docs.DocumentListEntry;
 import com.google.gdata.data.docs.DocumentListFeed;
+import com.google.gdata.data.docs.DrawingEntry;
 import com.google.gdata.data.docs.PresentationEntry;
 import com.google.gdata.data.docs.SpreadsheetEntry;
 import com.google.gdata.util.AuthenticationException;
@@ -63,7 +64,7 @@ public class GoogleDocs extends MVCPortlet {
 			throws OAuthException, IOException, ServiceException {
 
 		String type = ParamUtil.getString(request, "createType");
-		String title = ParamUtil.getString(request, "createName");
+		String title = ParamUtil.getString(request, "createTitle");
 
 		DocumentListEntry newEntry = null;
 		if (type.equals("document")) {
@@ -72,7 +73,9 @@ public class GoogleDocs extends MVCPortlet {
 			newEntry = new PresentationEntry();
 		} else if (type.equals("spreadsheet")) {
 			newEntry = new SpreadsheetEntry();
-		}
+		} else if (type.equals("drawing")) {
+			newEntry = new DrawingEntry();
+		} 
 		newEntry.setTitle(new PlainTextConstruct(title));
 
 		//String newEntryUrl = newEntry.getDocumentLink().getHref();

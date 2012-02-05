@@ -35,18 +35,16 @@ if (feed == null) {
 <div id="<portlet:namespace />googleDocsWrapper">
 	<div class="toolbar" id="<portlet:namespace />toolbar">
 		<div class="search-wrapper" id="<portlet:namespace />searchWrapper">
-			<aui:form action="" method="get" name="gdSearch">
-
+			<portlet:actionURL name="searchDocs" var="searchUrl" />
+			<aui:form action="<%=searchUrl.toString() %>" method="post" name="gdSearch">
 				<aui:layout>
 					<aui:column>
 						<aui:input cssClass="search-input" id="keywords" label="" name="keywords" type="text" />
 					</aui:column>
-
 					<aui:column>
 						<aui:button cssClass="search-button" name="search" value="search" />
 					</aui:column>
 				</aui:layout>
-
 			</aui:form>
 		</div>
 		<div class='table'>
@@ -54,20 +52,21 @@ if (feed == null) {
 			<aui:form action="<%=createDocUrl.toString() %>" method="post" name="gdCreate">
 			<div class="table_row">
 				<div class="table_cell">
-					<aui:input cssClass="create-input" id="keywords" label="new-doc-name" name="createName" type="text" />
+					<aui:input cssClass="create-title" id="keywords" label="new-doc-title" name="createTitle" type="text" />
 				</div>
 				<div class="table_cell">
 					<aui:select cssClass="create-type" label="type" name="createType">
 						<aui:option value="document"><liferay-ui:message key="document" /></aui:option>
 						<aui:option value="spreadsheet"><liferay-ui:message key="spreadsheet" /></aui:option>
 						<aui:option value="presentation"><liferay-ui:message key="presentation" /></aui:option>
+						<aui:option value="drawing"><liferay-ui:message key="drawing" /></aui:option>
 					</aui:select>
 				</div>
 				<div class="table_cell align-bottom">
 					<aui:button type="submit" value="Create" />
 				</div>
-			</aui:form>
 			</div>
+			</aui:form>
 		</div>
 	</div>
 
