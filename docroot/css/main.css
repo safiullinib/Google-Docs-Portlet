@@ -18,9 +18,10 @@
  **/
 
 .search-wrapper {
-	width: 250px;
+	width: auto;
 	float: right;
 	text-align: right;
+	padding-top:15px;
 }
 
 .doc-list-wrapper {
@@ -29,13 +30,14 @@
 	margin-bottom: 25px;
 }
 
+.aui-searchcontainer-content {
+	font-size: 12px;
+}
+
 .doc-type-column {
 	text-align: center;
 }
 
-.gdColumn-2 {
-	vertical-align: bottom;
-}
 
 .col-1 {
 	width: 15px;
@@ -51,7 +53,11 @@ td.last {
 	width: 100px;
 }
 
+select {
+	font-size: 12px !important;
+}
+
 .table {display:table;}
 .table_row {display:table-row;}
-.table_cell {display:table-cell;padding:7px;}
+.table_cell {display:table-cell;padding-right:7px;}
 .align-bottom {vertical-align:bottom;}

@@ -21,13 +21,13 @@
 
 <%@include file="/init.jsp" %>
 
-<% DocumentListFeed docListFeed = GoogleDocs.getDocumentListFeed(renderRequest); %>
+<% //DocumentListFeed docListFeed = GoogleDocs.getDocumentListFeed(renderRequest); %>
 
 	<div class="doc-list-wrapper" id="<portlet:namespace />docListWrapper">
 		<liferay-ui:search-container emptyResultsMessage="there-are-no-google-docs-to-display" delta="20">
 	    	<liferay-ui:search-container-results>
 	    	<%
-	    		List<DocumentListEntry> tempResults = GoogleDocs.getDocumentList(docListFeed);
+	    		List<DocumentListEntry> tempResults = ActionUtil.getDocumentList(feed);
 
 	    		results = ListUtil.subList(tempResults, searchContainer.getStart(), searchContainer.getEnd());
 			    total = tempResults.size();

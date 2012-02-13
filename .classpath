@@ -3,7 +3,7 @@
 	<classpathentry kind="src" path="docroot/WEB-INF/src"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry exported="true" kind="con" path="com.liferay.ide.eclipse.server.plugin.container/portlet">
+	<classpathentry kind="con" path="com.liferay.ide.eclipse.server.plugin.container/portlet">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
