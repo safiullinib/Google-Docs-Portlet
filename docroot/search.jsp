@@ -20,9 +20,10 @@
 %>
 
 <%@include file="/init.jsp" %>
+<%--<jsp:useBean id="feed" type="com.google.gdata.data.docs.DocumentListFeed" scope="request" /> --%>
 
 <%
-DocumentListFeed feed = (DocumentListFeed)ActionUtil.getDocumentListFeed(renderRequest);
+DocumentListFeed feed = (DocumentListFeed)request.getAttribute("feed");
 
 //if (feed == null) {
 %>

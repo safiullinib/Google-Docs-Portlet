@@ -19,10 +19,7 @@
 
 package org.gnenc.googledocs.portlet;
 
-import com.google.gdata.client.authn.oauth.GoogleOAuthParameters;
 import com.google.gdata.client.authn.oauth.OAuthException;
-import com.google.gdata.client.authn.oauth.OAuthHmacSha1Signer;
-import com.google.gdata.client.authn.oauth.OAuthSigner;
 import com.google.gdata.client.docs.DocsService;
 import com.google.gdata.data.PlainTextConstruct;
 import com.google.gdata.data.docs.DocumentEntry;
@@ -31,38 +28,22 @@ import com.google.gdata.data.docs.DocumentListFeed;
 import com.google.gdata.data.docs.DrawingEntry;
 import com.google.gdata.data.docs.PresentationEntry;
 import com.google.gdata.data.docs.SpreadsheetEntry;
-import com.google.gdata.util.AuthenticationException;
-import com.google.gdata.util.ResourceNotFoundException;
 import com.google.gdata.util.ServiceException;
 
-import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.User;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.util.bridges.mvc.MVCPortlet;
-import com.liferay.util.portlet.PortletProps;
-
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
-
 import java.text.ParseException;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
-import javax.portlet.RenderRequest;
 public class GoogleDocs extends MVCPortlet {
 	public void createDoc(ActionRequest request, ActionResponse response)
 			throws OAuthException, IOException, ServiceException {
-
 		String type = ParamUtil.getString(request, "createType");
 		String title = ParamUtil.getString(request, "createTitle");
 
@@ -82,135 +63,31 @@ public class GoogleDocs extends MVCPortlet {
 		ThemeDisplay themeDisplay = (ThemeDisplay) request
 			.getAttribute(WebKeys.THEME_DISPLAY);
 		String userEmail = themeDisplay.getUser().getEmailAddress();
-		DocsService service = getService(userEmail);
-		URL feedUrl = getFeedUrl(userEmail);
+		DocsService service = ActionUtil.getService(userEmail);
+		URL feedUrl = ActionUtil.getFeedUrl(userEmail,true);
 		//URL docListFeedUrl = new URL(scope + feedUrl);
 		service.insert(feedUrl, newEntry);
 
 		//response.setRenderParameter("newDocUrl", newEntryUrl);
 		
 	}
-
-	public static List<DocumentListEntry> getDocumentList(
-			DocumentListFeed feed) {
-		List<DocumentListEntry> docList = new ArrayList<DocumentListEntry>();
-
-		for (DocumentListEntry entry : feed.getEntries()) {
-			docList.add(entry);
-
-		}
-		return docList;
-
-	}
-
-	public static DocumentListFeed getDocumentListFeed(RenderRequest request)
-			throws IOException, ServiceException, OAuthException,
-			ParseException {
-		DocumentListFeed feed = new DocumentListFeed();
-		User user = getUser(request);
-		String userEmail = user.getEmailAddress();
-		URL feedUrl = getFeedUrl(userEmail);
-		Boolean isDefaultUser = user.isDefaultUser();
-
-		if (!isDefaultUser) {
-			DocsService service = getService(userEmail);
-			try {
-				feed = service.getFeed(feedUrl, DocumentListFeed.class);
-				
-			} catch (ResourceNotFoundException e) {
-				feed = null;
-				SessionErrors
-					.add(request, "this-is-not-a-valid-google-account");
-				
-			} catch (AuthenticationException e) {
-				feed = null;
-				SessionErrors
-					.add(request, "google-docs-authentication-failed");
-				
-			}
-		} else {
-			feed = null;
-			SessionErrors.add(request,
-					"you-must-be-logged-in-to-view-google-docs");
-			
-		}
-		return feed;
-
-	}
-
-	public static URL getFeedUrl(String userEmail)
-			throws UnsupportedEncodingException, MalformedURLException {
-		String scope = getScope();
-		String feedUrl = URLEncoder.encode(userEmail, "UTF-8")
-				+ "/private/full";
-		String requestor = URLEncoder.encode(
-				GetterUtil.getString(PortletProps
-					.get("google.docs.oauth.requestor")), "UTF-8");
-			URL docListFeedUrl = new URL(scope + feedUrl
-					+ "?xoauth_requestor_id=" + requestor);
-		return docListFeedUrl;
-
-	}
-
-	public static DocsService getService(String userEmail)
-			throws UnsupportedEncodingException, MalformedURLException,
-				OAuthException {
-		String consumerKey = GetterUtil.getString(PortletProps
-				.get("google.docs.oauth.consumer.key"));
-		String consumerSecret = GetterUtil.getString(PortletProps
-				.get("google.docs.oauth.consumer.secret"));
-		String scope = getScope();
-
-		GoogleOAuthParameters oauthParams = new GoogleOAuthParameters();
-		oauthParams.setOAuthConsumerKey(consumerKey);
-		oauthParams.setOAuthConsumerSecret(consumerSecret);
-		oauthParams.setScope(scope);
-		
-		OAuthSigner signer = new OAuthHmacSha1Signer();
-		DocsService service = new DocsService("Document List");
-		service.setOAuthCredentials(oauthParams, signer);
-		return service;
-	}
-
-	public static User getUser(RenderRequest request) {
+	
+	public void searchDocs(ActionRequest request, ActionResponse response) 
+			throws IOException, ServiceException, OAuthException, ParseException {
+		String searchString = ParamUtil.getString(request, "searchString");
 		ThemeDisplay themeDisplay = (ThemeDisplay) request
 				.getAttribute(WebKeys.THEME_DISPLAY);
 		User user = themeDisplay.getUser();
-		return user;
-
+		
+		DocumentListFeed feed = (DocumentListFeed)ActionUtil.getDocumentListFeedFromTitleQuery(user,searchString);
+		
+		request.setAttribute("feed", feed);
+		response.setRenderParameter("jspPage", searchJSP);
+		
 	}
+	
+	protected String searchJSP = "/search.jsp";
 
-	protected static String getOAuthConsumerKey() {
-		return _OAUTH_CONSUMER_KEY;
-
-	}
-
-	protected static String getOAuthConsumerSecret() {
-		return _OAUTH_CONSUMER_SECRET;
-
-	}
-
-	protected static String getOAuthRequestor() {
-		return _OAUTH_REQUESTOR;
-
-	}
-
-	protected static String getScope() {
-		return _SCOPE;
-
-	}
-
-	private static final String _OAUTH_CONSUMER_KEY =
-			GetterUtil.getString(PortletProps
-				.get("google.docs.oauth.consumer.key"));
-	private static final String _OAUTH_REQUESTOR =
-			GetterUtil.getString(PortletProps
-				.get("google.docs.oauth.consumer.requestor"));
-	private static final String _OAUTH_CONSUMER_SECRET =
-			GetterUtil.getString(PortletProps
-				.get("google.docs.oauth.consumer.secret"));
-	private static final String _SCOPE =
-			GetterUtil.getString(PortletProps
-				.get("google.docs.oauth.scope"));
+	
 
 }

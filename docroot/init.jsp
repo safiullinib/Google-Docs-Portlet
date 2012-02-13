@@ -25,6 +25,7 @@
 <%@ taglib uri="http://liferay.com/tld/security" prefix="liferay-security" %>
 <%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui" %>
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
+<%@ taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
 <%@ page import="java.util.Arrays" %>
 <%@ page import="java.util.ArrayList" %>
@@ -40,5 +41,6 @@
 <%@ page import="com.google.gdata.data.docs.DocumentListFeed" %>
 
 <%@ page import="org.gnenc.googledocs.portlet.GoogleDocs" %>
+<%@ page import="org.gnenc.googledocs.portlet.ActionUtil" %>
 
 <portlet:defineObjects />
