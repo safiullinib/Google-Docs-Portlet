@@ -1,2 +1,2 @@
-/docroot/WEB-INF/src/portlet.properties
-/.settings/
+docroot/WEB-INF/classes/portlet.properties
+.settings/
