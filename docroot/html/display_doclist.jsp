@@ -21,6 +21,17 @@
 
 <%@include file="/init.jsp" %>
 
+<%
+DocumentListFeed feed = (DocumentListFeed)ActionUtil.getDocumentListFeed(renderRequest);
+%>
+<liferay-ui:error key="google-docs-authentication-failed" message="google-docs-authentication-failed" />
+<liferay-ui:error key="this-is-not-a-valid-google-account" message="this-is-not-a-valid-google-account" />
+<liferay-ui:error key="you-must-be-logged-in-to-view-google-docs" message="you-must-be-logged-in-to-view-google-docs" />
+<%
+if (Validator.isNotNull(feed)) {
+%>
+<%@include file="/html/toolbar.jsp" %>
+
 <div class="doc-list-wrapper" id="<portlet:namespace />docListWrapper">
 	<liferay-ui:search-container emptyResultsMessage="there-are-no-google-docs-to-display" delta="20">
     	<liferay-ui:search-container-results>
@@ -68,3 +79,6 @@
 
 	</liferay-ui:search-container>
 </div>
+<%
+}
+%>

@@ -17,6 +17,10 @@
  *  along with the Google Docs portlet.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
+.google-docs-wrapper {
+	min-height: 100px;
+}
+
 .search-wrapper {
 	width: auto;
 	float: right;
