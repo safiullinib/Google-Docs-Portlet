@@ -20,24 +20,13 @@
 %>
 
 <%@include file="/init.jsp" %>
-<%--<jsp:useBean id="feed" type="com.google.gdata.data.docs.DocumentListFeed" scope="request" /> --%>
 
 <%
-DocumentListFeed feed = (DocumentListFeed)request.getAttribute("feed");
-
-//if (feed == null) {
+DocumentListFeed feed = (DocumentListFeed)ActionUtil.getDocumentListFeed(renderRequest);
 %>
-	<liferay-ui:error key="google-docs-authentication-failed" message="google-docs-authentication-failed" />
-	<liferay-ui:error key="this-is-not-a-valid-google-account" message="this-is-not-a-valid-google-account" />
-	<liferay-ui:error key="you-must-be-logged-in-to-view-google-docs" message="you-must-be-logged-in-to-view-google-docs" />
-<%
-//} else {
-if (feed != null) {
-%>
-<div id="<portlet:namespace />googleDocsWrapper">
-<%@include file="/toolbar.jsp" %>
-<%@include file="/doclist_display.jsp" %>
-<%
-}
-%>
-</div>
+<liferay-ui:error key="google-docs-authentication-failed" message="google-docs-authentication-failed" />
+<liferay-ui:error key="this-is-not-a-valid-google-account" message="this-is-not-a-valid-google-account" />
+<liferay-ui:error key="you-must-be-logged-in-to-view-google-docs" message="you-must-be-logged-in-to-view-google-docs" />
+	
+<%@include file="/html/toolbar.jsp" %>
+<%@include file="/html/display_doclist.jsp" %>

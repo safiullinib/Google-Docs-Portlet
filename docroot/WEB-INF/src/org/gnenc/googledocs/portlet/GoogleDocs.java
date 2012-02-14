@@ -92,8 +92,8 @@ public class GoogleDocs extends MVCPortlet {
 	}
 	
 
-	protected String contentJSP = "/display_content.jsp";
-	protected String searchJSP = "/display_searchlist.jsp";
+	protected String contentJSP = "/html/display_content.jsp";
+	protected String searchJSP = "/html/display_searchlist.jsp";
 	protected String viewJSP = "/view.jsp";
 
 	

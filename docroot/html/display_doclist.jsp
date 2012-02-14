@@ -42,7 +42,7 @@
 
     		<liferay-ui:search-container-column-jsp
 		        name="doc-type"
-		        path="/column_doctype.jsp"
+		        path="/html/column_doctype.jsp"
 		        />
 
 		    <liferay-ui:search-container-column-text
@@ -58,7 +58,7 @@
 		        />
 
 		    <liferay-ui:search-container-column-jsp
-       			path="/column_docactions.jsp"
+       			path="/html/column_docactions.jsp"
        			align="right"
         	/>
 
