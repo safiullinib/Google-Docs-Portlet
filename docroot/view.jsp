@@ -21,22 +21,27 @@
 
 <%@include file="/init.jsp" %>
 
-<%
-DocumentListFeed feed = (DocumentListFeed)ActionUtil.getDocumentListFeed(renderRequest);
+<portlet:actionURL var="contentJSP" name="getContentJSP" 
+	windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" />
 
-//if (feed == null) {
-%>
-	<liferay-ui:error key="google-docs-authentication-failed" message="google-docs-authentication-failed" />
-	<liferay-ui:error key="this-is-not-a-valid-google-account" message="this-is-not-a-valid-google-account" />
-	<liferay-ui:error key="you-must-be-logged-in-to-view-google-docs" message="you-must-be-logged-in-to-view-google-docs" />
-<%
-//} else {
-if (feed != null) {
-%>
+<script type="text/javascript">
+AUI().use('io-plugin',function(A) {
+	var contentNode = A.one("#<portlet:namespace/>googleDocsWrapper");
+	//Currently, this does not work. Only gets portal language keys
+	var loading = Liferay.Language.get('loading-google-docs');
+	
+	if (contentNode) {
+		contentNode.plug(A.Plugin.IO, { 
+			uri: '<%=contentJSP.toString()%>', 
+			loadingMask: {
+				strings: {loading: loading}
+			}
+		});
+	}
+});
+</script>
+
 <div id="<portlet:namespace />googleDocsWrapper">
+<!-- Wrapper will hold all content retrieved through Alloy -->
 <%@include file="/toolbar.jsp" %>
-<%@include file="/doclist_display.jsp" %>
-<%
-}
-%>
 </div>

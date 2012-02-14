@@ -33,14 +33,19 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ListIterator" %>
 
+<%@ page import="com.liferay.portal.kernel.portlet.LiferayWindowState"%>
 <%@ page import="com.liferay.portal.kernel.util.ListUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
 <%@ page import="com.liferay.portal.kernel.dao.search.ResultRow" %>
+
+<%@ page import="com.liferay.portlet.PortletURLUtil"%>
 
 <%@ page import="com.google.gdata.data.docs.DocumentListEntry" %>
 <%@ page import="com.google.gdata.data.docs.DocumentListFeed" %>
 
 <%@ page import="org.gnenc.googledocs.portlet.GoogleDocs" %>
 <%@ page import="org.gnenc.googledocs.portlet.ActionUtil" %>
+
+<%@ page import="javax.portlet.PortletURL" %>
 
 <portlet:defineObjects />
