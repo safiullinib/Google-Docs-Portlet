@@ -37,7 +37,6 @@
 	</div>
 	<div class='table'>
 		<portlet:actionURL name="createDoc" var="createDocUrl" />
-		
 		<aui:form action="<%=createDocUrl.toString() %>" method="post" name="gdCreate">
 		<div class="table_row">
 			<div class="table_cell">

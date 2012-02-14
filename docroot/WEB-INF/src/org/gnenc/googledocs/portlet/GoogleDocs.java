@@ -69,7 +69,7 @@ public class GoogleDocs extends MVCPortlet {
 		service.insert(feedUrl, newEntry);
 
 		//response.setRenderParameter("newDocUrl", newEntryUrl);
-		
+		response.setRenderParameter("jspPage", viewJSP);
 	}
 	
 	public void searchDocs(ActionRequest request, ActionResponse response) 
@@ -86,7 +86,15 @@ public class GoogleDocs extends MVCPortlet {
 		
 	}
 	
-	protected String searchJSP = "/search.jsp";
+	public void getContentJSP(ActionRequest request, ActionResponse response) {
+		response.setRenderParameter("jspPage", contentJSP);
+		
+	}
+	
+
+	protected String contentJSP = "/display_content.jsp";
+	protected String searchJSP = "/display_searchlist.jsp";
+	protected String viewJSP = "/view.jsp";
 
 	
 
