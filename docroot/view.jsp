@@ -41,7 +41,6 @@ AUI().use('io-plugin',function(A) {
 });
 </script>
 
-<div id="<portlet:namespace />googleDocsWrapper">
+<div id="<portlet:namespace />googleDocsWrapper" class="google-docs-wrapper">
 <!-- Wrapper will hold all content retrieved through Alloy -->
-<%@include file="/html/toolbar.jsp" %>
 </div>
